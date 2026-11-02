@@ -1,0 +1,36 @@
+{
+  "notes": "Weights sum to 100. 1-5 inputs map linearly to 0..1 (competition and return_risk inverted). Missing inputs score 0.5 and are listed as assumed.",
+  "weights": {
+    "commission": 25,
+    "demand": 20,
+    "demo": 15,
+    "trust": 10,
+    "price_fit": 10,
+    "competition": 10,
+    "return_risk": 5,
+    "trend": 5
+  },
+  "commission_full_thb": 60,
+  "price_sweet_spot_thb": [99, 699],
+  "trust": {
+    "rating_floor": 4.0,
+    "rating_full": 5.0,
+    "reviews_full": 500,
+    "rating_share": 0.7
+  },
+  "compliance": {
+    "medium_penalty": 10,
+    "high_cap": 40
+  },
+  "grades": {
+    "go": 75,
+    "test": 60
+  },
+  "max_assumed": 3,
+  "labels": {
+    "go": "ทำเลย",
+    "test": "ทดสอบ",
+    "skip": "ข้าม",
+    "unknown": "ข้อมูลไม่พอ"
+  }
+}
