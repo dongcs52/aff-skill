@@ -1,5 +1,10 @@
 # Aff-Skill
 
+[![Release](https://img.shields.io/github/v/release/dongcs52/aff-skill)](https://github.com/dongcs52/aff-skill/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/dongcs52/aff-skill)](LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Claude Skill](https://img.shields.io/badge/Claude-Skill-D97757?logo=claude&logoColor=white)](https://claude.com/claude-code)
+
 [English](README.md) · **ภาษาไทย**
 
 Claude Skill สำหรับคนทำ affiliate ตลาดไทย ฝั่ง creator: TikTok Shop, Shopee, Lazada และ CPA network (Involve Asia, Accesstrade) เลือกสินค้า/offer คำนวณค่าคอมและ payout เขียนสคริปต์คลิป/ไลฟ์/โพสต์รีวิว วาง sub_id อ่านรายงาน คำนวณจุดคุ้มทุนยิงแอด ตรวจคำโฆษณาผิดกฎ และวางแผน 30 วัน
@@ -23,7 +28,7 @@ ln -s "$PWD" ~/.claude/skills/aff-skill
 | `reference/platforms.md` | กลไกของแต่ละแพลตฟอร์ม (ตัวเลขที่เปลี่ยนบ่อยติดป้าย `ตรวจสอบใน dashboard`) |
 | `config/claims-rules.json` | กฎ lint คำโฆษณา (regex + severity + วิธีแก้) |
 | `config/scoring.json` | น้ำหนักคะแนนสินค้า |
-| `scripts/aff_tools.py` | `earn` / `ads` / `score` / `lint` / `report` (stdlib, Python 3.8+, `.xlsx` ใช้ openpyxl) |
+| `scripts/aff_tools.py` | `earn` / `ads` / `score` / `lint` / `report` (stdlib, Python 3.9+, `.xlsx` ใช้ openpyxl) |
 
 ## ใช้ tool ตรง ๆ
 

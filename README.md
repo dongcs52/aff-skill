@@ -1,5 +1,10 @@
 # Aff-Skill
 
+[![Release](https://img.shields.io/github/v/release/dongcs52/aff-skill)](https://github.com/dongcs52/aff-skill/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/dongcs52/aff-skill)](LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Claude Skill](https://img.shields.io/badge/Claude-Skill-D97757?logo=claude&logoColor=white)](https://claude.com/claude-code)
+
 **English** · [ภาษาไทย](README.th.md)
 
 A Claude Skill for affiliate creators in the Thai market. It covers the creator side of TikTok Shop, Shopee, Lazada, and CPA networks (Involve Asia, Accesstrade): picking products and offers, commission and payout math, short-video / LIVE / review scripts, sub_id tracking, performance reports, paid-traffic break-even, ad-claim compliance, and 30-day growth plans.
@@ -42,7 +47,7 @@ Start a new session, then type `/aff-skill` or describe your affiliate task in T
 | `reference/platforms.md` | Mechanics of each platform; figures that change often are labelled `ตรวจสอบใน dashboard` (check in your dashboard) |
 | `config/claims-rules.json` | Ad-claim lint rules (regex, severity, fix) |
 | `config/scoring.json` | Product scoring weights and thresholds |
-| `scripts/aff_tools.py` | CLI: `earn` / `ads` / `score` / `lint` / `report` (Python 3.8+ stdlib; `.xlsx` needs `openpyxl`) |
+| `scripts/aff_tools.py` | CLI: `earn` / `ads` / `score` / `lint` / `report` (Python 3.9+ stdlib; `.xlsx` needs `openpyxl`) |
 
 ## Using the tool directly
 
