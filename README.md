@@ -1,45 +1,80 @@
 # Aff-Skill
 
-Claude Skill สำหรับคนทำ affiliate ตลาดไทย ฝั่ง creator: TikTok Shop, Shopee, Lazada และ CPA network (Involve Asia, Accesstrade) เลือกสินค้า/offer คำนวณค่าคอมและ payout เขียนสคริปต์คลิป/ไลฟ์/โพสต์รีวิว วาง sub_id อ่านรายงาน คำนวณจุดคุ้มทุนยิงแอด ตรวจคำโฆษณาผิดกฎ และวางแผน 30 วัน
+**English** · [ภาษาไทย](README.th.md)
 
-## ติดตั้ง
+A Claude Skill for affiliate creators in the Thai market. It covers the creator side of TikTok Shop, Shopee, Lazada, and CPA networks (Involve Asia, Accesstrade): picking products and offers, commission and payout math, short-video / LIVE / review scripts, sub_id tracking, performance reports, paid-traffic break-even, ad-claim compliance, and 30-day growth plans.
+
+The skill answers in Thai and keeps platform and metric terms in English (GMV, CTR, CVR, EPC, sub_id, Showcase).
+
+## What it does
+
+| Task | Example prompt | Output |
+|---|---|---|
+| Product picking | `ไม้ถูพื้นสเปรย์ 399 บาท ค่าคอม 10% ขายแล้ว 12k คุ้มไหม` | Ranked table with a /100 score, verdict (ทำเลย / ทดสอบ / ข้าม), and earnings estimate |
+| Short video | `เขียนสคริปต์คลิป 30 วิ` | 3 variants with different angles: shot table, caption, hashtags, disclosure, CTA |
+| LIVE | `สคริปต์ไลฟ์ขายของ 1 ชม.` | Run-of-show, product rotation, admin checklist |
+| Written content | Facebook, Pantip, blog, LINE OA | Post templates with tracked link placeholders |
+| CPA offers | credit cards, loans, insurance, apps | Net EPC after approval rate, mandatory finance warnings |
+| Paid traffic | `ยิงแอดเข้าลิงก์คุ้มไหม` | Go / no-go from break-even CPC/CPM, test plan with kill and scale rules |
+| Reports | paste a Shopee / TikTok / Lazada export | KPIs per product or sub_id with SCALE / FIX / CUT verdicts |
+| Compliance | `แคปชันนี้ผิดกฎไหม` | Lint findings by severity with safer phrasing |
+
+Every number comes from `scripts/aff_tools.py`, and every piece of selling copy passes the compliance lint before delivery.
+
+## Install
+
+Requires [Claude Code](https://claude.com/claude-code).
 
 ```bash
+git clone https://github.com/dongcs52/aff-skill.git
+cd aff-skill
 ln -s "$PWD" ~/.claude/skills/aff-skill
 ```
 
-เปิด session ใหม่แล้วพิมพ์ `/aff-skill` หรือคุยเรื่อง affiliate ตามปกติ (เช่น "เขียนสคริปต์ปักตะกร้าไม้ถูพื้น 30 วิ")
+Start a new session, then type `/aff-skill` or describe your affiliate task in Thai or English.
 
-## โครงสร้าง
+## Structure
 
-| Path | หน้าที่ |
+| Path | Purpose |
 |---|---|
-| `SKILL.md` | router: เลือก module ตาม intent + กฎที่ใช้ทุกงาน |
+| `SKILL.md` | Router: picks a module by intent, plus the rules every task follows |
 | `modules/` | product-pick, cpa-networks, paid-traffic, short-video, live, written-content, links-tracking, analytics, growth-plan, compliance |
-| `reference/platforms.md` | กลไกของแต่ละแพลตฟอร์ม (ตัวเลขที่เปลี่ยนบ่อยติดป้าย `ตรวจสอบใน dashboard`) |
-| `config/claims-rules.json` | กฎ lint คำโฆษณา (regex + severity + วิธีแก้) |
-| `config/scoring.json` | น้ำหนักคะแนนสินค้า |
-| `scripts/aff_tools.py` | `earn` / `ads` / `score` / `lint` / `report` (stdlib, Python 3.8+, `.xlsx` ใช้ openpyxl) |
+| `reference/platforms.md` | Mechanics of each platform; figures that change often are labelled `ตรวจสอบใน dashboard` (check in your dashboard) |
+| `config/claims-rules.json` | Ad-claim lint rules (regex, severity, fix) |
+| `config/scoring.json` | Product scoring weights and thresholds |
+| `scripts/aff_tools.py` | CLI: `earn` / `ads` / `score` / `lint` / `report` (Python 3.8+ stdlib; `.xlsx` needs `openpyxl`) |
 
-## ใช้ tool ตรง ๆ
+## Using the tool directly
 
 ```bash
-python3 scripts/aff_tools.py earn --price 399 --rate 10:30 --rate 4 --views 20000 --ctr 1 --cvr 4 --target 30000
+python3 scripts/aff_tools.py earn --price 399 --rate 10:30 --rate 4 --views 20000 --ctr 1 --cvr 4 --target 30000  # 10% capped at ฿30/item + 4% seller bonus
 python3 scripts/aff_tools.py earn --payout 350 --approval 55 --clicks 2000 --cvr 3      # CPA offer
-python3 scripts/aff_tools.py ads  --price 399 --rate 14 --spend 1000 --cpc 2 --cvr 4     # ยิงแอดคุ้มไหม
-python3 scripts/aff_tools.py score products.json
-python3 scripts/aff_tools.py lint caption.txt
-python3 scripts/aff_tools.py report shopee-export.csv --by product
+python3 scripts/aff_tools.py ads  --price 399 --rate 14 --spend 1000 --cpc 2 --cvr 4     # is paid traffic profitable?
+python3 scripts/aff_tools.py score products.json                                        # rank candidates /100
+python3 scripts/aff_tools.py lint caption.txt                                           # exit code 2 on any high finding
+python3 scripts/aff_tools.py report shopee-export.csv --by product                      # CSV / XLSX, Thai or English headers
 ```
 
-## Test
+Run any subcommand with `--help` for its fields.
+
+## Tests
 
 ```bash
 python3 -m unittest discover -s scripts
 ```
 
-## ปรับแต่ง
+## Tuning
 
-- เจอคำเสี่ยงใหม่: เพิ่ม rule ใน `config/claims-rules.json` แล้วเพิ่ม test ใน `scripts/test_aff_tools.py`
-- report map column ผิด: ใช้ `--map field=ชื่อคอลัมน์` และเพิ่ม alias ใน `FIELD_ALIASES` ถ้าเจอซ้ำ
-- ตัวเลขแพลตฟอร์ม (ค่าคอม, เกณฑ์ follower, attribution window) อัปเดตใน `reference/platforms.md` พร้อมวันที่ตรวจสอบ
+- **New risky phrase**: add a rule to `config/claims-rules.json` and a test to `scripts/test_aff_tools.py`.
+- **Report maps a column wrongly**: pass `--map field=column_name`; add the alias to `FIELD_ALIASES` if it recurs.
+- **Platform figures** (commission rates, follower thresholds, attribution windows): update `reference/platforms.md` with the date you checked.
+
+## Limits
+
+- The compliance lint is a practical check, not legal advice. It reads text only; images and footage need a human check.
+- Commission rates, eligibility rules, and payout terms change often. The skill uses your numbers and labels anything else as unverified.
+- Marketplace pages block automated fetching, so the skill asks you for price, sold count, rating, and commission instead of scraping them.
+
+## License
+
+[MIT](LICENSE)
