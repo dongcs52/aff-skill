@@ -1,5 +1,6 @@
 # Aff-Skill
 
+[![CI](https://github.com/dongcs52/aff-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/dongcs52/aff-skill/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/dongcs52/aff-skill)](https://github.com/dongcs52/aff-skill/releases/latest)
 [![License: MIT](https://img.shields.io/github/license/dongcs52/aff-skill)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
